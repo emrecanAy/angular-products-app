@@ -1,32 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './Product';
 import { AlertifyService } from "../services/alertify.service";
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  providers: [ProductService]
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private alertifyService:AlertifyService) { }
+  constructor(private alertifyService: AlertifyService, private productService:ProductService) { }
   title = "Ürün Listesi"
   filterText = ""
-  products : Product[] = [
-    {id: 1, name: "Laptop", price: 2780, categoryId: 1, description: "Macbook Pro", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"},
-    {id: 2, name: "Mouse", price: 260, categoryId: 2, description: "Logitech", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"},
-    {id: 1, name: "Laptop", price: 2780, categoryId: 1, description: "Macbook Pro", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"},
-    {id: 2, name: "Mouse", price: 260, categoryId: 2, description: "Logitech", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"},
-    {id: 1, name: "Laptop", price: 2780, categoryId: 1, description: "Macbook Pro", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"},
-    {id: 2, name: "Mouse", price: 260, categoryId: 2, description: "Logitech", imageUrl: "https://images.unsplash.com/photo-1585247226801-bc613c441316?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"}
-  ]
+  products!: Product[];
 
-  ngOnInit(): void {
+  ngOnInit(): void {//komponent ilk açıldıgı zama ncalısır.
+    this.productService.getProducts().subscribe(data => {
+      this.products = data;
+    });
   }
 
 
-  addToCart(product: any){
-    this.alertifyService.success(product.name+" added to cart!");
+  addToCart(product: any) {
+    this.alertifyService.success(product.name + " added to cart!");
   }
 
 }
