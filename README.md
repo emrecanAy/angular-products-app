@@ -1,4 +1,4 @@
-<img src="app.gif"/>
+<img src="app.gif" width=1280 height=720/>
 
 # Shop
 
