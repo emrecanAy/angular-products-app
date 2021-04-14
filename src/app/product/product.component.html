@@ -11,7 +11,7 @@
   </div>
 </ng-template>
 <div class="row">
-  <div *ngFor="let product of products | productFilter: filterText" class="productbox" style="width: 18rem;">
+  <div *ngFor="let product of products | productFilter: filterText" class="productbox">
     <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{product.name}} {{product.price | currency:'TRY':'₺'}}</h5>
